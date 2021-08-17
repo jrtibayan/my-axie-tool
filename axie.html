@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Calculator</title>
+    <!-- <link href="axie.css" rel="stylesheet"> -->
+    <style type="text/css">
+      *, *::before, *::after {
+  box-sizing: border-box;
+  font-family: Gotham Rounded, sans-serif;
+  font-weight: normal;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #CBCE91FF, #EA738DFF);
+  }
+
+  .calculator-grid {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    grid-template-columns: repeat(2, 200px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+    }
+
+    .calculator-grid > button {
+      cursor: pointer;
+      font-size: 2rem;
+      border: 1px, solid #FFFFFF;
+      outline: none;
+      background-color: rbga(255, 255, 255, 0.75);
+    }
+
+      .calculator-grid > button:hover {
+        background-color: #a9a9a9;
+      }
+
+      .span-two {
+        grid-column: span 2;
+        color: #adf802;
+        background-color: rgba(139, 0, 139, 0.8);
+      }
+
+      .output{
+        grid-column: 1 / -1;
+        background-color: rgba(0, 0, 0, 0.75);
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-around;
+        flex-direction: column;
+        padding: 10px;
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+
+      .output .previous-operand{
+        color: rgba(255,255, 255, 0.75);
+        font-size: 1.5rem;
+      }
+
+      .output .current-operand{
+        color: white;
+        font-size: 2.5rem;
+      }
+    </style>
+    <script src="axie.js" defer></script>
+</head>
+<body>
+    <div class="calculator-grid">
+        <div class="output">
+            <div class="current-operand" id="turn_count">Turn: 1</div>
+            <div class="previous-operand" id="card_count">Card: 6</div>
+            <div class="current-operand" id="energy_count">Energy: 3</div>
+        </div>
+        <button class="span-two" onclick="new_game()">Reset</button>
+        <button onclick="minus_card()">Card -</button>
+        <button onclick="plus_card()">Card +</button>
+        <button onclick="minus_energy()">Ener -</button>
+        <button onclick="plus_energy()">Ener +</button>
+        <button class="span-two" onclick="new_turn()">NEW TURN</button>
+    </div>
+  
+  <script>
+    function new_game(){
+      document.getElementById("turn_count").innerHTML = "Turn: 1";
+      document.getElementById("card_count").innerHTML = "Card: 6";
+      document.getElementById("energy_count").innerHTML = "Energy: 3";
+    }
+    function minus_energy(){
+      var a = document.getElementById("energy_count").innerHTML.split(" ");
+      document.getElementById("energy_count").innerHTML = a[0] + " " + (parseInt(a[1])-1);
+    }
+    function plus_energy(){
+      var a = document.getElementById("energy_count").innerHTML.split(" ");
+      document.getElementById("energy_count").innerHTML = a[0] + " " + (parseInt(a[1])+1);
+    }
+
+    function minus_card(){
+      var a = document.getElementById("card_count").innerHTML.split(" ");
+      document.getElementById("card_count").innerHTML = a[0] + " " + (parseInt(a[1])-1);
+    }
+    function plus_card(){
+      var a = document.getElementById("card_count").innerHTML.split(" ");
+      document.getElementById("card_count").innerHTML = a[0] + " " + (parseInt(a[1])+1);
+    }
+    function new_turn(){
+      var a = document.getElementById("card_count").innerHTML.split(" ");
+      document.getElementById("card_count").innerHTML = a[0] + " " + (parseInt(a[1])+3);
+      a = document.getElementById("energy_count").innerHTML.split(" ");
+      document.getElementById("energy_count").innerHTML = a[0] + " " + (parseInt(a[1])+2);
+      a = document.getElementById("turn_count").innerHTML.split(" ");
+      document.getElementById("turn_count").innerHTML = a[0] + " " + (parseInt(a[1])+1);
+    }
+
+  </script>
+</body>
+</html>
